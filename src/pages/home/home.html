@@ -1,17 +1,77 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>iWeather</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+<ion-content padding class="home">
+  
+  <ion-grid *ngIf="condition && location">
+    <ion-row>
+      <ion-col width-50 offset-25  text-center>
+        <h1>{{location_api.city}}, {{location_api.region}} </h1>
+        <h2 class="temp">{{ condition.temp }}&deg;</h2>
+        <h4 class="desc">
+            <ion-icon *ngIf='condition.code==11' name="ios-rainy-outline"></ion-icon>
+            <ion-icon *ngIf='condition.code==12' name="ios-rainy-outline"></ion-icon>
+
+            <ion-icon *ngIf='condition.code==26' name="ios-cloudy-outline"></ion-icon>
+            <ion-icon *ngIf="condition.code==27" name="ios-cloudy-night-outline"></ion-icon>
+            <ion-icon *ngIf="condition.code==28" name="ios-cloudy-outline"></ion-icon>
+            <ion-icon *ngIf="condition.code==29" name="ios-cloudy-night-outline"></ion-icon>
+            <ion-icon *ngIf="condition.code==30" name="ios-cloudy-outline"></ion-icon>
+            <ion-icon *ngIf="condition.code==31" name="ios-moon-outline"></ion-icon>
+            <ion-icon *ngIf="condition.code==32" name="ios-sunny-outline"></ion-icon>
+            <ion-icon *ngIf="condition.code==34" name="ios-partly-sunny-outline"></ion-icon>
+            <ion-icon *ngIf="condition.code==39" name="ios-thunderstorm-outline"></ion-icon>
+            
+          {{ condition.text }}
+        </h4>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <ion-grid *ngIf="condition && location">
+    <ion-row>
+      <ion-col col-8>
+        Date
+      </ion-col>  
+      <ion-col col-2 text-center>
+        <strong>Max</strong>
+      </ion-col>
+      <ion-col col-2 text-center>
+        Min
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngFor="let f of forecast">
+      <ion-col col-8>
+
+        <ion-icon *ngIf='f.code==11' name="ios-rainy-outline"></ion-icon>
+        <ion-icon *ngIf='f.code==12' name="ios-rainy-outline"></ion-icon>
+
+        <ion-icon *ngIf='f.code==26' name="ios-cloudy-outline"></ion-icon>
+        <ion-icon *ngIf="f.code==27" name="ios-cloudy-night-outline"></ion-icon>
+        <ion-icon *ngIf="f.code==28" name="ios-cloudy-outline"></ion-icon>
+        <ion-icon *ngIf="f.code==29" name="ios-cloudy-night-outline"></ion-icon>
+        <ion-icon *ngIf="f.code==30" name="ios-cloudy-outline"></ion-icon>
+        <ion-icon *ngIf="f.code==31" name="ios-moon-outline"></ion-icon>
+        <ion-icon *ngIf="f.code==32" name="ios-sunny-outline"></ion-icon>
+        <ion-icon *ngIf="f.code==34" name="ios-partly-sunny-outline"></ion-icon>
+        <ion-icon *ngIf="f.code==39" name="ios-thunderstorm-outline"></ion-icon>
+        
+         {{ f.date }}
+      </ion-col>
+      <ion-col col-2 text-center>
+        <strong>{{ f.high }}&deg;</strong>
+      </ion-col>
+      <ion-col col-2 text-center>
+        {{ f.low }}&deg;
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  
+
 </ion-content>
